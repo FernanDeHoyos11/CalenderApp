@@ -7,7 +7,7 @@ import { Link as RouterLink }  from "react-router-dom"
 export const Login = () => {
     return (
        
-            <AuthLayout title="Login">
+            <AuthLayout  title="Login">
                  <form>
             <Grid container
                 flexDirection='row'

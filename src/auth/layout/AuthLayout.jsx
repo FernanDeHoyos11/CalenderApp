@@ -4,7 +4,7 @@ export const AuthLayout = ({ children, title = '' }) => {
 
     return (
         <Grid
-            className="animate__animated animate__pulse"
+            
             container
             spacing={0}
             direction="column"
@@ -14,6 +14,7 @@ export const AuthLayout = ({ children, title = '' }) => {
 
 
             <Grid item
+             className="animate__animated animate__flipInY"
                 boxShadow={'0px 5px 5px rgba(0, 0, 0, 0.2)'}
                 xs={12}
                 sx={{ background: 'white', padding: 3, borderRadius: 2, textAlign: 'center', alignItems: "center" }} >

@@ -7,9 +7,10 @@ import { Link } from "react-router-dom"
 export const Register = () => {
     return (
        
-            <AuthLayout title="Login">
+            <AuthLayout  title="Register">
                  <form>
             <Grid container
+            className=""
                 flexDirection='row'
                 flexWrap='nowrap'
                 alignItems='center'
@@ -20,7 +21,23 @@ export const Register = () => {
                   "@media (min-width: 900px) and (max-width: 1150px)": {
                     width: '650px', 
                   }},  maxWidth: '100%',}}>
+ <Grid container
+                    flexDirection={'column'}
+                    justifyContent={"center"}
+                    alignItems={'center'}
+                    sx={{display: {sm: 'block', xs: 'none', "@media (min-width: 590px) and (max-width: 899px)": {
+                        display: 'none', 
+                      },}}}
+                    >
 
+                    <CardMedia
+                        component="img"
+                        sx={{ width: '100%', borderRadius: 3 }}
+                        image="/vista_login.jpg"
+                        alt="Live from space album cover"
+                    />
+
+                </Grid>
                 <Grid container spacing={1}
                     flexDirection={'column'}
                     alignItems={'center'}
@@ -53,29 +70,13 @@ export const Register = () => {
                         </Grid>
 
                         <Grid container direction='row' justifyContent='center'>
-                        <Link color="inherit" to='/auth/register'>
+                        <Link color="inherit" to='/auth/login'>
                             Ya tengo cuenta
                         </Link>
                        </Grid>
                 </Grid>
 
-                <Grid container
-                    flexDirection={'column'}
-                    justifyContent={"center"}
-                    alignItems={'center'}
-                    sx={{display: {sm: 'block', xs: 'none', "@media (min-width: 590px) and (max-width: 899px)": {
-                        display: 'none', 
-                      },}}}
-                    >
-
-                    <CardMedia
-                        component="img"
-                        sx={{ width: '100%', borderRadius: 3 }}
-                        image="/vista_login.jpg"
-                        alt="Live from space album cover"
-                    />
-
-                </Grid>
+               
             </Grid>
             </form>
         </AuthLayout>
