@@ -8,6 +8,7 @@ import { CalendarModal } from "../components/CaledarModal";
 import { useUiStore } from "../../hooks/useUiStore";
 import { useCalendarStore } from "../../hooks/useCalendarStore";
 import { FadAddNew } from "../components/FadAddNew";
+import { FadDelete } from "../components/FadDelete";
 
 
 
@@ -66,6 +67,7 @@ export const CalederPage = () => {
       </div>
 
       <FadAddNew/>
+      <FadDelete/>
     </>
   );
 };
