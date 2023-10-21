@@ -1,6 +1,5 @@
 
 export const CalenadarEven = ({event}) => {
-    console.log(event)
     const {title, user} = event
   return (
     <>

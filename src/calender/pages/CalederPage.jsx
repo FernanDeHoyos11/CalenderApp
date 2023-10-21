@@ -1,24 +1,20 @@
-import { addDays } from "date-fns"
-import { Navbar } from "../components/Nabvar"
-import { Calendar } from 'react-big-calendar'
-import { localizer, getMessages } from "../../helpers"
-import { CalenadarEven } from "../components/CalenadarEven"
-import { useState } from "react"
-import { CalendarModal } from "../components/CaledarModal"
+import { addDays } from "date-fns";
+import { Navbar } from "../components/Nabvar";
+import { Calendar } from 'react-big-calendar';
+import { localizer, getMessages } from "../../helpers";
+import { CalenadarEven } from "../components/CalenadarEven";
+import { useState } from "react";
+import { CalendarModal } from "../components/CaledarModal";
+import { useUiStore } from "../../hooks/useUiStore";
+import { useCalendarStore } from "../../hooks/useCalendarStore";
+import { FadAddNew } from "../components/FadAddNew";
 
-const myEventsList = [{
-  title: 'Entrevista con intelecto',
-  notes: 'miercoles 9:15 AM',
-  start: addDays(new Date().setHours(9, 15), 4),
-  end: addDays(new Date().setHours(10, 0), 4),
-  user: { _id: 135, name: 'fernan' }
-}]
 
 
 export const CalederPage = () => {
-
-
-  const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week')
+  const {events, setActive} = useCalendarStore();
+  const { onDateModalOpen, onDateModalColse} = useUiStore();
+  const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week');
 
   const eventStylesGet = (event, start, end, isSelected) => {
     const style = {
@@ -26,24 +22,28 @@ export const CalederPage = () => {
       borderRadius: '0px',
       opacity: 0.8,
       color: 'white'
-    }
-  
+    };
+
     return {
       style
-    }
-  }
+    };
+  };
+
   const onDobleClick = (event) => {
-    console.log({ onDobleClick: event })
-  }
-  
+    // Tu lógica para manejar el doble clic aquí
+    console.log('Doble clic en el evento:', event);
+    onDateModalOpen();
+  };
+
   const onClick = (event) => {
-    console.log({ onClick: event })
-  }
-  
+    setActive(event)
+  };
+
   const onViewChange = (event) => {
-    localStorage.setItem('lastView', event)
-    setLastView(event)
-  }
+    localStorage.setItem('lastView', event);
+    setLastView(event);
+  };
+
   return (
     <>
       <Navbar></Navbar>
@@ -52,19 +52,20 @@ export const CalederPage = () => {
           culture="es"
           defaultView={lastView}
           localizer={localizer}
-          events={myEventsList}
+          events={events}
           startAccessor="start"
           endAccessor="end"
           style={{ height: 'calc(100vh - 80px)' }}
           messages={getMessages()}
           eventPropGetter={eventStylesGet}
           components={{ event: CalenadarEven }}
-          onDoubleClickEvent={onDobleClick}
-          onSelectEvent={onClick}
+          onDoubleClickEvent={(e) => onDobleClick(e)} // Maneja el doble clic
+          onSelectEvent={(e) => onClick(e)} // Maneja el clic normal
           onView={onViewChange}
         />
       </div>
 
+      <FadAddNew/>
     </>
-  )
-}
+  );
+};

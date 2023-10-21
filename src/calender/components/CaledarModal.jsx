@@ -9,6 +9,9 @@ import Swal from "sweetalert2";
 import "react-datepicker/dist/react-datepicker.css";
 import es from 'date-fns/locale/es';
 import 'sweetalert2/dist/sweetalert2.min.css'
+import { useUiStore } from "../../hooks/useUiStore";
+import { useEffect } from "react";
+import { useCalendarStore } from "../../hooks/useCalendarStore";
 
 
 const style = {
@@ -25,7 +28,10 @@ const style = {
 
 export const CalendarModal = () => {
     registerLocale('es', es)
-    const [open, setOpen] = useState(false);
+
+    const {isDataModalOpen, onDateModalColse} = useUiStore()
+    const {activeEvent, startSavingEvent} = useCalendarStore();
+    
     const [isFormValue, setIsFormValue] = useState(false);
     const [formValue, setFormValue] = useState({
         title: 'fernan',
@@ -39,8 +45,16 @@ export const CalendarModal = () => {
         return (formValue.title.length > 0) ? '' : 'is-invalid'
 
     }, [formValue.title, isFormValue])
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+
+    useEffect(() => {
+        if(activeEvent !== null){
+            setFormValue({...activeEvent})
+        }
+    }, [activeEvent])
+
+    const handleClose = () =>{
+        onDateModalColse()
+    }
 
     const onHandleChange = ({ target }) => {
         setFormValue({
@@ -56,7 +70,7 @@ export const CalendarModal = () => {
         })
     }
 
-    const onSubmit = (event) => {
+    const onSubmit = async (event) => {
         setIsFormValue(true)
         event.preventDefault()
         const difference = differenceInSeconds(formValue.end, formValue.start)
@@ -65,14 +79,17 @@ export const CalendarModal = () => {
             return
         }
 
-        if (formValue.title <= 0) return;
+        if (formValue.title.length <= 0) return;
+
+        await startSavingEvent(formValue)
+        onDateModalColse()
+        setIsFormValue(false)
     }
 
     return (
         <div className="container">
-            <Button sx={{color: 'white'}} onClick={handleOpen} >Agregar evento</Button>
             <Modal
-                open={open}
+                open={isDataModalOpen}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
