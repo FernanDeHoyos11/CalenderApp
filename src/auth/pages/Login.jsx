@@ -2,13 +2,27 @@ import { Button, CardMedia, Grid, Link, TextField, Typography } from "@mui/mater
 import { AuthLayout } from "../layout/AuthLayout"
 import { Google } from "@mui/icons-material"
 import { Link as RouterLink }  from "react-router-dom"
+import { useForm } from "../../hooks/useForm"
 
+const formLogin = {
+    email: '',
+    password: ''
+}
 
 export const Login = () => {
+
+    const {email, password, onInputChange} = useForm(formLogin);
+
+    const loginSubmit = (event) => {
+        event.preventDefault()
+        console.log({email, password})
+
+    }
+
     return (
        
             <AuthLayout  title="Login">
-                 <form>
+             <form onSubmit={loginSubmit}>
             <Grid container
                 flexDirection='row'
                 flexWrap='nowrap'
@@ -29,14 +43,20 @@ export const Login = () => {
                         <TextField 
                         id="outlined-basic"
                         label="Email"
-                        variant="outlined" />
+                        variant="outlined"
+                        name="email"
+                        value={email}
+                        onChange={onInputChange} />
                     </Grid>
 
                     <Grid item >
                         <TextField 
                         id="outlined-basic"
                         label="Password"
-                        variant="outlined" />
+                        variant="outlined"
+                        name="password"
+                        value={password}
+                        onChange={onInputChange} />
                     </Grid>
 
                     <Grid item xs={12}  width={{ sm:'50%'}}>

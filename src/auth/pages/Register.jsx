@@ -2,13 +2,26 @@ import { Button, CardMedia, Grid, TextField, Typography } from "@mui/material"
 import { AuthLayout } from "../layout/AuthLayout"
 import { Google } from "@mui/icons-material"
 import { Link } from "react-router-dom"
+import { useForm } from "../../hooks/useForm"
 
-
+const formRegister = {
+    name: '',
+    email: '',
+    password: ''
+}
 export const Register = () => {
+
+    const {name, email, password, onInputChange} = useForm(formRegister);
+
+    const registerSubmit = (event) => {
+        event.preventDefault()
+        console.log({name, email, password})
+
+    }
     return (
        
             <AuthLayout  title="Register">
-                 <form>
+                 <form onSubmit={registerSubmit}>
             <Grid container
             className=""
                 flexDirection='row'
@@ -46,21 +59,30 @@ export const Register = () => {
                         <TextField 
                         id="outlined-basic"
                         label="Nombre"
-                        variant="outlined" />
+                        variant="outlined"
+                        name="name"
+                        value={name}
+                        onChange={onInputChange}/>
                     </Grid>
 
                     <Grid item >
                         <TextField 
                         id="outlined-basic"
                         label="Email"
-                        variant="outlined" />
+                        variant="outlined"
+                        name="email"
+                        value={email}
+                        onChange={onInputChange} />
                     </Grid>
 
                     <Grid item >
                         <TextField 
                         id="outlined-basic"
                         label="Password"
-                        variant="outlined" />
+                        variant="outlined"
+                        name="password"
+                        value={password}
+                        onChange={onInputChange} />
                     </Grid>
 
                     <Grid item xs={12}  width={{ sm:'50%'}}>
