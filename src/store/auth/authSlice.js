@@ -15,15 +15,19 @@ export const autchSlice = createSlice({
         },
         logout: (state, {payload}) => {
             state.status = 'no-authenticated'
-            state.errorMessage = payload?.errorMessage
+            state.errorMessage = payload
+            state.user = {}
         },
         checkingCredentials: (state) =>{
            state.status = 'checking',
            state.user = {},
            state.errorMessage = null
         },
+        clearErrorMessage: (state) => {
+            state.errorMessage = null
+        }
 
 }
 });
 
-export const { login, logout, checkingCredentials} = autchSlice.actions;
+export const { login, logout, checkingCredentials, clearErrorMessage} = autchSlice.actions;

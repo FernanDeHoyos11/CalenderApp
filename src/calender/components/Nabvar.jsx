@@ -8,13 +8,25 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useState } from 'react';
 import { CalendarModal } from './CaledarModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../store/auth/authSlice';
 
 export const Navbar = () => {
+
+    const dispatch = useDispatch()
+    const {user} = useSelector(state => state.auth)
+
+
+
     const [onModal, setOnModal] = useState(false)
 
     const onModalClick = ( ) => {
         setOnModal(true)
         console.log('first')
+    }
+
+    const onLogout = () => {
+        dispatch(logout('sesion cerrada'))
     }
 
     return (
@@ -32,13 +44,13 @@ export const Navbar = () => {
                             <CalendarMonthIcon />
                         </IconButton>
                         <Typography variant="h6" component="div">
-                            Fernan
+                            {user?.name}
                         </Typography>
 
                      <CalendarModal/> 
                     </Box>
 
-                    <Button variant="outlined" color="error" startIcon={<LogoutIcon />}>
+                    <Button variant="outlined" onClick={onLogout} color="error" startIcon={<LogoutIcon />}>
                         Salir
                     </Button>
                 </Toolbar>

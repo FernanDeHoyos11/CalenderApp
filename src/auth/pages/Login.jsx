@@ -3,6 +3,9 @@ import { AuthLayout } from "../layout/AuthLayout"
 import { Google } from "@mui/icons-material"
 import { Link as RouterLink }  from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
+import { useAuthStore } from "../../hooks/useAuthStore"
+import { useEffect } from "react"
+import Swal from "sweetalert2"
 
 const formLogin = {
     email: '',
@@ -10,14 +13,20 @@ const formLogin = {
 }
 
 export const Login = () => {
-
+    const {startLogin, errorMessage} = useAuthStore()
     const {email, password, onInputChange} = useForm(formLogin);
 
     const loginSubmit = (event) => {
         event.preventDefault()
         console.log({email, password})
-
+        startLogin({email: email, password: password})
     }
+
+    useEffect(() => {
+        if(errorMessage !== null){
+            Swal.fire('Error en la autenticacion', errorMessage, 'error')
+        }
+    }, [errorMessage])
 
     return (
        

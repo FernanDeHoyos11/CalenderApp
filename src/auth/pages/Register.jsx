@@ -1,23 +1,42 @@
-import { Button, CardMedia, Grid, TextField, Typography } from "@mui/material"
+import { Alert, Button, CardMedia, Grid, TextField, Typography } from "@mui/material"
 import { AuthLayout } from "../layout/AuthLayout"
 import { Google } from "@mui/icons-material"
 import { Link } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
+import { useAuthStore } from "../../hooks/useAuthStore"
+import { useEffect, useState } from "react"
+import Swal from "sweetalert2"
 
 const formRegister = {
     name: '',
     email: '',
-    password: ''
+    password: '',
+    confirPassword: '',
 }
 export const Register = () => {
 
-    const {name, email, password, onInputChange} = useForm(formRegister);
+    const {startRegister, errorMessage} = useAuthStore()
+    const [isVisible, setIsVisible] = useState('none')
+    const {name, email, password, confirPassword, onInputChange} = useForm(formRegister);
 
     const registerSubmit = (event) => {
         event.preventDefault()
-        console.log({name, email, password})
-
+        if(password !== confirPassword){
+            Swal.fire('Error', 'Las contraseñas no coinciden', 'error')
+            return
+        }
+        startRegister({name, email, password})
     }
+
+    useEffect(() => {
+        if(errorMessage !== null){
+            Swal.fire('Error en la autenticacion', errorMessage, 'error')
+        }
+    }, [errorMessage])
+
+    
+
+
     return (
        
             <AuthLayout  title="Register">
@@ -84,6 +103,17 @@ export const Register = () => {
                         value={password}
                         onChange={onInputChange} />
                     </Grid>
+
+                    <Grid item >
+                        <TextField 
+                        id="outlined-basic"
+                        label="confirm-password"
+                        variant="outlined"
+                        name="confirPassword"
+                        value={confirPassword}
+                        onChange={onInputChange} />
+                    </Grid>
+
 
                     <Grid item xs={12}  width={{ sm:'50%'}}>
                             <Button type="submit" variant="contained" fullWidth >
