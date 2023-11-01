@@ -3,7 +3,7 @@ import { Navbar } from "../components/Nabvar";
 import { Calendar } from 'react-big-calendar';
 import { localizer, getMessages } from "../../helpers";
 import { CalenadarEven } from "../components/CalenadarEven";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CalendarModal } from "../components/CaledarModal";
 import { useUiStore } from "../../hooks/useUiStore";
 import { useCalendarStore } from "../../hooks/useCalendarStore";
@@ -13,7 +13,7 @@ import { FadDelete } from "../components/FadDelete";
 
 
 export const CalederPage = () => {
-  const {events, setActive} = useCalendarStore();
+  const {events, setActive, startLoadingEvents} = useCalendarStore();
   const { onDateModalOpen, onDateModalColse} = useUiStore();
   const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week');
 
@@ -44,6 +44,10 @@ export const CalederPage = () => {
     localStorage.setItem('lastView', event);
     setLastView(event);
   };
+
+  useEffect(() => {
+    startLoadingEvents()
+  },[])
 
   return (
     <>

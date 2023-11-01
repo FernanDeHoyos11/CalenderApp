@@ -6,27 +6,18 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useState } from 'react';
 import { CalendarModal } from './CaledarModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../store/auth/authSlice';
+import { useAuthStore } from '../../hooks/useAuthStore';
+import { useSelector } from 'react-redux';
 
 export const Navbar = () => {
 
-    const dispatch = useDispatch()
+    const {startLogout} = useAuthStore()
     const {user} = useSelector(state => state.auth)
 
 
-
-    const [onModal, setOnModal] = useState(false)
-
-    const onModalClick = ( ) => {
-        setOnModal(true)
-        console.log('first')
-    }
-
     const onLogout = () => {
-        dispatch(logout('sesion cerrada'))
+        startLogout()
     }
 
     return (

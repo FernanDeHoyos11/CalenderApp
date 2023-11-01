@@ -5,13 +5,13 @@ export const autchSlice = createSlice({
     initialState: {
         status: 'checking',
         user: {},
-        errorMessage: null
+        errorMessage: undefined
      },
     reducers: {
         login: (state,  {payload}  ) => {
             state.status = 'authenticated'
             state.user = payload,
-            state.errorMessage = null
+            state.errorMessage = undefined
         },
         logout: (state, {payload}) => {
             state.status = 'no-authenticated'
@@ -21,10 +21,10 @@ export const autchSlice = createSlice({
         checkingCredentials: (state) =>{
            state.status = 'checking',
            state.user = {},
-           state.errorMessage = null
+           state.errorMessage = undefined
         },
         clearErrorMessage: (state) => {
-            state.errorMessage = null
+            state.errorMessage = undefined
         }
 
 }

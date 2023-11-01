@@ -16,7 +16,6 @@ const formRegister = {
 export const Register = () => {
 
     const {startRegister, errorMessage} = useAuthStore()
-    const [isVisible, setIsVisible] = useState('none')
     const {name, email, password, confirPassword, onInputChange} = useForm(formRegister);
 
     const registerSubmit = (event) => {
@@ -29,7 +28,7 @@ export const Register = () => {
     }
 
     useEffect(() => {
-        if(errorMessage !== null){
+        if(errorMessage !== undefined){
             Swal.fire('Error en la autenticacion', errorMessage, 'error')
         }
     }, [errorMessage])

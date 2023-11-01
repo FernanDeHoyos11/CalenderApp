@@ -22,8 +22,10 @@ export const Login = () => {
         startLogin({email: email, password: password})
     }
 
+    console.log(errorMessage)
+
     useEffect(() => {
-        if(errorMessage !== null){
+        if(errorMessage !== undefined){
             Swal.fire('Error en la autenticacion', errorMessage, 'error')
         }
     }, [errorMessage])
