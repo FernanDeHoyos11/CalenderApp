@@ -20,19 +20,12 @@ export const AppRouter = () => {
 
   return (
     <Routes>
-        {(status === 'no-authenticated')
-         ? (
-           <>
-            <Route path="/auth/*" element={<AuthRouter/>} />
-            <Route path="/*" element={<Navigate to='/auth/login'/>} />
-           </>)
-         : 
-          <>
-          <Route path="/" element={<CalederPage/>} />
-          <Route path="/*" element={<Navigate to='/'/>} />
-         </>
-         }
-
-   </Routes>
+      {(status === 'authenticated')
+        ? <Route path="/" element={<CalederPage />} />
+        : <Route path="/auth/*" element={<AuthRouter />} />
+      }
+      <Route path="/auth/login" element={<Navigate to="/" />} />
+      <Route path="/*" element={<Navigate to="/auth/login" />} />
+    </Routes>
   )
 }
