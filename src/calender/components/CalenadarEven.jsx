@@ -4,7 +4,8 @@ export const CalenadarEven = ({event}) => {
   return (
     <>
         <strong> {title} </strong>
-        <span>{user?.name}</span>
+        <br />
+        <span> -{user?.name}</span>
     </>
   )
 }

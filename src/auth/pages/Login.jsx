@@ -76,12 +76,12 @@ export const Login = () => {
                             </Button>
                         </Grid>
 
-                        <Grid item  xs={12} width={{ sm:'50%'}}>
+                        {/* <Grid item  xs={12} width={{ sm:'50%'}}>
                             <Button  variant="contained" fullWidth>
                                 <Google></Google>
                                 <Typography sx={{ml: 1}} > Google </Typography>
                             </Button>
-                        </Grid>
+                        </Grid> */}
 
                         <Grid container direction='row' justifyContent='center'>
                         <Link component={RouterLink} color="inherit" to='/auth/register'>

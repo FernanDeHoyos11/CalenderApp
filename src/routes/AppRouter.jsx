@@ -3,6 +3,7 @@ import { CalederPage } from "../calender/pages/CalederPage"
 import { AuthRouter } from "../auth/Router/AuthRouter"
 import { useEffect } from "react"
 import { useAuthStore } from "../hooks/useAuthStore"
+import { BackDrop } from "../calender/components/BackDrop"
 
 
 export const AppRouter = () => {
@@ -14,7 +15,7 @@ export const AppRouter = () => {
   },[])
 
   if(status === 'checking'){
-    return <h1>cargando...</h1>
+    return <BackDrop/>
   }
 
   return (
