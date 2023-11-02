@@ -24,7 +24,7 @@ export const AppRouter = () => {
         ? <Route path="/" element={<CalederPage />} />
         : <Route path="/auth/*" element={<AuthRouter />} />
       }
-      <Route path="/auth/login" element={<Navigate to="/" />} />
+      <Route path="/auth/login" element={<Navigate to="/auth" />} />
       <Route path="/*" element={<Navigate to="/auth/login" />} />
     </Routes>
   )
