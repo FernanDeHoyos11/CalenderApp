@@ -9,17 +9,22 @@ import { useUiStore } from "../../hooks/useUiStore";
 import { useCalendarStore } from "../../hooks/useCalendarStore";
 import { FadAddNew } from "../components/FadAddNew";
 import { FadDelete } from "../components/FadDelete";
+import { useSelector } from "react-redux";
 
 
 
 export const CalederPage = () => {
+  const {user} = useSelector(state => state.auth)
   const {events, setActive, startLoadingEvents} = useCalendarStore();
   const { onDateModalOpen, onDateModalColse} = useUiStore();
   const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week');
 
   const eventStylesGet = (event, start, end, isSelected) => {
+    console.log(event.user)
+    const isMyEvent = (user.uid === event.user._id) || (user.uid === event.user.uid)
+
     const style = {
-      backgroundColor: '#347CF7',
+      backgroundColor: isMyEvent ? '#347CF7' : '#5A8FAA',
       borderRadius: '0px',
       opacity: 0.8,
       color: 'white'
