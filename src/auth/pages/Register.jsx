@@ -1,10 +1,9 @@
-import { Alert, Button, CardMedia, Grid, TextField, Typography } from "@mui/material"
+import {  Button, CardMedia, Grid, TextField } from "@mui/material"
 import { AuthLayout } from "../layout/AuthLayout"
-import { Google } from "@mui/icons-material"
 import { Link } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
 import { useAuthStore } from "../../hooks/useAuthStore"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import Swal from "sweetalert2"
 
 const formRegister = {

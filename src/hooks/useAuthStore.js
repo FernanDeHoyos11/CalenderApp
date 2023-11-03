@@ -15,7 +15,6 @@ export const useAuthStore = () => {
         try {
             dispatch(checkingCredentials())
             const {data} = await calendarApi.post('/auth/login', {email, password})
-            console.log(data)
             localStorage.setItem('token', data.token)
             localStorage.setItem('token-init-date', new Date().getTime())
             dispatch(login({name: data.name, uid: data.uid}))
@@ -35,7 +34,6 @@ export const useAuthStore = () => {
         try {
 
             const {data} = await calendarApi.post('/auth/new', {name, email, password})
-            console.log(data)
             localStorage.setItem('token', data.token)
             localStorage.setItem('token-init-date', new Date().getTime())
             dispatch(login({name: data.name, uid: data.uid}))

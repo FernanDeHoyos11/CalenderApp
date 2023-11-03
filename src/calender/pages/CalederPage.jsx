@@ -1,10 +1,8 @@
-import { addDays } from "date-fns";
 import { Navbar } from "../components/Nabvar";
 import { Calendar } from 'react-big-calendar';
 import { localizer, getMessages } from "../../helpers";
 import { CalenadarEven } from "../components/CalenadarEven";
 import { useEffect, useState } from "react";
-import { CalendarModal } from "../components/CaledarModal";
 import { useUiStore } from "../../hooks/useUiStore";
 import { useCalendarStore } from "../../hooks/useCalendarStore";
 import { FadAddNew } from "../components/FadAddNew";
@@ -16,11 +14,10 @@ import { useSelector } from "react-redux";
 export const CalederPage = () => {
   const {user} = useSelector(state => state.auth)
   const {events, setActive, startLoadingEvents} = useCalendarStore();
-  const { onDateModalOpen, onDateModalColse} = useUiStore();
+  const { onDateModalOpen} = useUiStore();
   const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week');
 
-  const eventStylesGet = (event, start, end, isSelected) => {
-    console.log(event.user)
+  const eventStylesGet = (event) => {
     const isMyEvent = (user.uid === event.user._id) || (user.uid === event.user.uid)
 
     const style = {

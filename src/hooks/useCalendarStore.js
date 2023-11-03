@@ -24,10 +24,8 @@ export const useCalendarStore = () => {
                 return
             }
             const { data } = await calendarApi.post('/calendar', calendarEvent)
-            console.log(data)
             dispatch(onAddNewEvent({ ...calendarEvent, _id: data.eventoAgregado._id, user }))
         } catch (error) {
-            console.log(error)
             Swal.fire('error al guardar', error.response.data?.msg, 'error')
         }
     }
@@ -38,7 +36,6 @@ export const useCalendarStore = () => {
             const { data } = await calendarApi.get('/calendar')
             const events = converterEventToDate(data.evento)
             dispatch(onLoadEvents(events))
-            console.log(events)
 
         } catch (error) {
             console.log(error)
@@ -52,7 +49,6 @@ export const useCalendarStore = () => {
             Swal.fire('Eliminado', 'se ha eliminado un evento', 'error')
             dispatch(onDeleteEvent())
         } catch (error) {
-            console.log(error)
             Swal.fire('error al eliminar', error.response.data?.msg, 'error')
         }
     }

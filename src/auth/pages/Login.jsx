@@ -1,6 +1,5 @@
 import { Button, CardMedia, Grid, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from "../layout/AuthLayout"
-import { Google } from "@mui/icons-material"
 import { Link as RouterLink }  from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
 import { useAuthStore } from "../../hooks/useAuthStore"
@@ -18,11 +17,9 @@ export const Login = () => {
 
     const loginSubmit = (event) => {
         event.preventDefault()
-        console.log({email, password})
         startLogin({email: email, password: password})
     }
 
-    console.log(errorMessage)
 
     useEffect(() => {
         if(errorMessage !== undefined){
